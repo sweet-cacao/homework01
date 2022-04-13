@@ -7,4 +7,5 @@ import java.io.IOException;
 @Component
 public interface TestService {
     void start() throws IOException;
+    void getAllQuestionsAndAnswers();
 }

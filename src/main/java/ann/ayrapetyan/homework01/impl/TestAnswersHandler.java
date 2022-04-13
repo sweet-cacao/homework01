@@ -29,12 +29,12 @@ public class TestAnswersHandler {
     }
 
     public void addWrongQuestion(Question q) {
-        rightQuestions.add(q);
+        wrongQuestions.add(q);
         countWrongAnswers++;
     }
 
     public void addRightQuestion(Question q) {
-        wrongQuestions.add(q);
+        rightQuestions.add(q);
         countRightAnswers++;
     }
 
