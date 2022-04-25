@@ -7,6 +7,7 @@ import ann.ayrapetyan.homework01.utils.CSVUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,7 @@ public class CSVTestResource implements TestResource {
 
     Queue<Question> questionList;
 
-    public CSVTestResource(@Value("${filename}") Resource res) throws WrongFileException, IOException {
+    public CSVTestResource(@Value("${filename}") FileSystemResource res) throws WrongFileException, IOException {
         try {
             questionList = CSVUtils.parseCSVFile(res.getFile());
         } catch (IOException | WrongFileException e) {

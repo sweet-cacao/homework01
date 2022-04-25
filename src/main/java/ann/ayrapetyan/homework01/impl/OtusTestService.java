@@ -5,6 +5,7 @@ import ann.ayrapetyan.homework01.TestService;
 import ann.ayrapetyan.homework01.data.Question;
 import ann.ayrapetyan.homework01.utils.CSVUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +17,26 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 
-@AllArgsConstructor
 @Component
 //@Qualifier("testService")
 public class OtusTestService implements TestService {
-    private TestResource resource;
-    private TestAnswersHandler answersHandler;
+    private final TestResource resource;
+    private final TestAnswersHandler answersHandler;
+    boolean finished = false;
+
+    @Autowired
+    public OtusTestService(CSVTestResource resource, TestAnswersHandler answersHandler) {
+        this.resource = resource;
+        this.answersHandler = answersHandler;
+    }
+
+    private static void accept(Question q) {
+        System.out.println("Question: " + q.getQuestion());
+        System.out.println("Answers: ");
+        q.getAnswers().forEach(System.out::println);
+        System.out.println("Right answers: ");
+        q.getRightAnswer().forEach(System.out::println);
+    }
 
     @Override
     public void start() throws IOException {
@@ -38,8 +53,22 @@ public class OtusTestService implements TestService {
 
             q = resource.getNextQuestion();
         }
+        finished = true;
         printResults();
     }
+
+    @Override
+    public void getAllQuestionsAndAnswers() {
+        if (!finished) {
+            System.out.println("Do the test at first!");
+            return;
+        }
+        System.out.println("You were right here:");
+        answersHandler.getRightQuestions().forEach(OtusTestService::accept);
+        System.out.println("You failed here:");
+        answersHandler.getWrongQuestions().forEach(OtusTestService::accept);
+    }
+
 
     private void printResults() {
         System.out.println("Your result is "
@@ -48,4 +77,5 @@ public class OtusTestService implements TestService {
                 + answersHandler.getCountRightAnswers()
                 + "/" + answersHandler.getCountWrongAnswers() + ".");
     }
+
 }
