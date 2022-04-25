@@ -29,6 +29,7 @@ class OtusTestServiceTest {
         testServiceStart("test1 test2\ntest1 test2\ntest test2\ntest test2", Mark.NORMAL);
     }
 
+
     @Test
     void testOk_2() throws IOException, WrongFileException {
         testServiceStart("test1 test2\ntest test2\ntest test2\ntest test2", Mark.BAD);
