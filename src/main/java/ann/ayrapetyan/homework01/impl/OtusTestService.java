@@ -1,6 +1,6 @@
 package ann.ayrapetyan.homework01.impl;
 
-import ann.ayrapetyan.homework01.TestResource;
+
 import ann.ayrapetyan.homework01.TestService;
 import ann.ayrapetyan.homework01.data.Question;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Component
 public class OtusTestService implements TestService {
-    private TestResource resource;
+    private CSVTestResource resource;
     private TestAnswersHandler answersHandler;
 
     @Override
