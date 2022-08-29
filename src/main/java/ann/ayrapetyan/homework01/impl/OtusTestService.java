@@ -3,15 +3,13 @@ package ann.ayrapetyan.homework01.impl;
 import ann.ayrapetyan.homework01.TestResource;
 import ann.ayrapetyan.homework01.TestService;
 import ann.ayrapetyan.homework01.data.Question;
-import ann.ayrapetyan.homework01.exception.WrongFileException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 
 @AllArgsConstructor
